@@ -60,9 +60,9 @@ public class Drivetrain extends SubsystemBase {
     // Creates a chooser dropdown with each of the driver control options
     oiChooser.addOption(DriveControls.SPLIT_TRIGGER.displayName, DriveControls.SPLIT_TRIGGER);
     oiChooser.addOption(DriveControls.SINGLE_TRIGGER.displayName, DriveControls.SINGLE_TRIGGER);
-    oiChooser.addOption(DriveControls.SINGLE_JOYSTICK.displayName, DriveControls.SINGLE_JOYSTICK);
+    oiChooser.addOption(DriveControls.TWO_JOYSTICK_GAS.displayName, DriveControls.TWO_JOYSTICK_GAS);
     oiChooser.setDefaultOption(
-        DriveControls.TWO_JOYSTICK_GAS.displayName, DriveControls.TWO_JOYSTICK_GAS);
+        DriveControls.SINGLE_JOYSTICK.displayName, DriveControls.SINGLE_JOYSTICK);
     SmartDashboard.putData("Drive Controls Chooser", oiChooser);
   }
 

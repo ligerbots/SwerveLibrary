@@ -13,7 +13,7 @@ port = "kMXP" # The name of the port, as passed into the navx constructor.
 # Front Right
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
-location-inches = { x = 11.075, y = -12.575 } # The location of the module.
+location-inches = { x = -11.075, y = 12.575 } # The location of the module.
 motors.lo.can-id = 3 # The CAN ID of the first motor.
 motors.hi.can-id = 2 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 1 # The CAN ID of the CANCoder.
@@ -22,7 +22,7 @@ azimuth-sensor.offset = 0 # The degrees to subtract from the read module angle.
 # Front Left
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
-location-inches = { x = 11.075, y = 12.575 } # The location of the module.
+location-inches = { x = -11.075, y = -12.575 } # The location of the module.
 motors.lo.can-id = 6 # The CAN ID of the first motor.
 motors.hi.can-id = 5 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 4 # The CAN ID of the CANCoder.
@@ -31,7 +31,7 @@ azimuth-sensor.offset = 0 # The degrees to subtract from the read module angle.
 # Back Left
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
-location-inches = { x = -11.075, y = 12.575 } # The location of the module.
+location-inches = { x = 11.075, y = -12.575 } # The location of the module.
 motors.lo.can-id = 9 # The CAN ID of the first motor.
 motors.hi.can-id = 8 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 7 # The CAN ID of the CANCoder.
@@ -40,7 +40,7 @@ azimuth-sensor.offset = 0 # The degrees to subtract from the read module angle.
 # Back Right
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
-location-inches = { x = -11.075, y = -12.575 } # The location of the module.
+location-inches = { x = 11.075, y = 12.575 } # The location of the module.
 motors.lo.can-id = 12 # The CAN ID of the first motor.
 motors.hi.can-id = 11 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 10 # The CAN ID of the CANCoder.
