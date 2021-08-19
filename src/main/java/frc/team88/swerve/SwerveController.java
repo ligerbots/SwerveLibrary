@@ -1,6 +1,8 @@
 package frc.team88.swerve;
 
 import com.ctre.phoenix.CANifier;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team88.swerve.configuration.Configuration;
 import frc.team88.swerve.data.DataManager;
 import frc.team88.swerve.gyro.SwerveGyro;
@@ -52,6 +54,8 @@ public class SwerveController {
    * Updates all controllers, data loggers, and anything else associated with this SwerveController.
    */
   public void update() {
+    SmartDashboard.putNumber("debug/call/SwerveController_update", Timer.getFPGATimestamp());
+
     this.tuningManager.update();
     if (!this.tuningManager.isEnabled()) {
       this.chassis.update();

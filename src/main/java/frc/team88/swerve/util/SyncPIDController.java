@@ -88,6 +88,10 @@ public class SyncPIDController {
     return this.config.getTolerance();
   }
 
+  public double getM_accum() {
+    return m_accum;
+  }
+
   /**
    * Resets the controller's saved info about integral and derivative. Should be called right before
    * the first use of the controller after it hasn't been used for a while.

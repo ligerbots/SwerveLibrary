@@ -1,5 +1,7 @@
 package frc.team88.swerve.motion;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team88.swerve.configuration.Configuration;
 import frc.team88.swerve.module.SwerveModule;
 import frc.team88.swerve.motion.kinematics.ForwardKinematics;
@@ -79,6 +81,8 @@ public class SwerveChassis {
    * @param hold True if there should be a hold, false otherwise.
    */
   public void holdAzimuths(boolean hold) {
+    SmartDashboard.putBoolean("debug/holdmode", hold);
+
     this.holdMode = hold;
   }
 
@@ -93,6 +97,8 @@ public class SwerveChassis {
 
   /** Updates all periodic processes in the swerve chassis, such as setting module controls. */
   public void update() {
+    SmartDashboard.putNumber("debug/call/Chassis_update", Timer.getFPGATimestamp());
+
     // Update the forward kinematics and compute current pose
     this.forwardKinematics.update();
 
@@ -107,10 +113,19 @@ public class SwerveChassis {
 
     // Set the constrained state
     this.constrainedState = semiConstrainedState;
+    SmartDashboard.putNumber("debug/constrainedState/translationSpeed/",constrainedState.getTranslationSpeed());
+    SmartDashboard.putNumber("debug/constrainedState/translationDirection/",constrainedState.getTranslationDirection());
+    SmartDashboard.putNumber("debug/constrainedState/rotationVelocity/",constrainedState.getRotationVelocity());
 
     // Command the modules
     ModuleState moduleStates[] = this.inverseKinematics.calculate(constrainedState);
+
     for (int idx = 0; idx < moduleStates.length; idx++) {
+      SmartDashboard.putNumber("debug/inverseKinematics/"+idx+"/azimuth", moduleStates[idx].getAzimuthPosition());
+      SmartDashboard.putNumber("debug/inverseKinematics/"+idx+"/wheel", moduleStates[idx].getWheelSpeed());
+      if(moduleStates[idx].getWheelSpeed()<0)
+        SmartDashboard.putBoolean("debug/inverseKinematics/"+idx+"/wheelSpeedHasEverBeenNegative",true);
+
       SwerveModule module = this.config.getModules()[idx];
       if (this.holdMode
           && this.constrainedState.getTranslationSpeed() == 0

@@ -1,5 +1,7 @@
 package frc.team88.swerve.module;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team88.swerve.configuration.subconfig.SwerveModuleConfiguration;
 import frc.team88.swerve.module.motor.SwerveMotor;
 import frc.team88.swerve.module.sensor.PositionSensor;
@@ -86,7 +88,14 @@ public class SwerveModule {
    *     per second.
    */
   public void set(double wheelVelocity, WrappedAngle azimuthPosition, double azimuthVelocity) {
+    SmartDashboard.putNumber("debug/call/SwerveModule_"+System.identityHashCode(this)+"_set", Timer.getFPGATimestamp());
+    String DEBUG_ROOT = "debug/SwerveModule_"+System.identityHashCode(this)+"/";
+
     this.targetWheelVelocity = wheelVelocity;
+    SmartDashboard.putNumber(DEBUG_ROOT+"targetWheelVelocity", targetWheelVelocity);
+    if(targetWheelVelocity<0)
+      SmartDashboard.putBoolean(DEBUG_ROOT+"targetWheelVelocityHasEverBeenNegative", true);
+    SmartDashboard.putNumber(DEBUG_ROOT+"targetAzimuthPosition", azimuthPositionController.getTargetPosition());
 
     // Calculate the actual sensor value to target for the azimuth
     double distanceToAzimuth = this.getAzimuthPosition().getSmallestDifferenceWith(azimuthPosition);
@@ -95,15 +104,21 @@ public class SwerveModule {
     // Get the azimuth velocity to command from the trapezoidal profile controller.
     this.azimuthPositionController.setTargetVelocity(azimuthVelocity);
     this.azimuthPositionController.setTargetPosition(unwrappedAzimuthAngle);
+
     double commandAzimuthVelocity =
         azimuthPositionController.calculateCommandVelocity(
             this.azimuthSensor.getPosition(), this.getAzimuthVelocity());
+    SmartDashboard.putNumber(DEBUG_ROOT+"commandAzimuthVelocity", commandAzimuthVelocity);
 
     // Apply the pid to the wheel velocity.
+    double wheelVelocityControllerOutput=this.wheelVelocityController.calculateOutput(
+            this.getWheelVelocity(), this.targetWheelVelocity);
     this.commandedWheelVelocity =
         this.targetWheelVelocity
-            + this.wheelVelocityController.calculateOutput(
-                this.getWheelVelocity(), this.targetWheelVelocity);
+            + wheelVelocityControllerOutput;
+    SmartDashboard.putNumber(DEBUG_ROOT+"commandedWheelVelocity", commandedWheelVelocity);
+    SmartDashboard.putNumber(DEBUG_ROOT+"commandedWheelVelocity_PID_accum", wheelVelocityController.getM_accum());
+    SmartDashboard.putNumber(DEBUG_ROOT+"commandedWheelVelocity_PID_output", wheelVelocityControllerOutput);
 
     this.setRawWheelVelocities(this.commandedWheelVelocity, commandAzimuthVelocity);
   }
