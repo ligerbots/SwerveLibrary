@@ -89,7 +89,7 @@ public class SwerveModule {
     this.targetWheelVelocity = wheelVelocity;
 
     // Calculate the actual sensor value to target for the azimuth
-    double distanceToAzimuth = this.getAzimuthPosition().getSmallestDifferenceWith(azimuthPosition);
+    double distanceToAzimuth = this.getAzimuthPosition().getDifferenceWith(azimuthPosition);
     double unwrappedAzimuthAngle = this.azimuthSensor.getPosition() + distanceToAzimuth;
 
     // Get the azimuth velocity to command from the trapezoidal profile controller.

@@ -49,13 +49,33 @@ public class WrappedAngle {
   }
 
   /**
-   * Gets the smallest difference (by magnitude) between this angle and the given angle, either
+   * Gets the difference (by magnitude) between this angle and the given angle, either
    * going clockwise or counter-clockwise.
    *
    * @param that The angle to get the difference from
    * @return The difference, in degrees. When added to this angle, the sum will be the given angle.
    */
+
   public double getSmallestDifferenceWith(WrappedAngle that) {
+    Objects.requireNonNull(that);
+    double difference = that.asDouble() - this.asDouble();
+    if (difference >= -180 && difference < 180) {
+      return difference;
+    } else if (difference < -180) {
+      return difference + 360;
+    } else { 
+      return difference - 360;
+    }
+  }
+
+  /**
+   * Gets the difference (by magnitude) between this angle and the given angle going ONLY clockwise.
+   *
+   * @param that The angle to get the difference from
+   * @return The difference, in degrees. When added to this angle, the sum will be the given angle.
+   */
+
+  public double getDifferenceWith(WrappedAngle that) {
     Objects.requireNonNull(that);
     double difference = that.asDouble() - this.asDouble();
     if (0 <= difference && difference < 180) {
@@ -66,14 +86,6 @@ public class WrappedAngle {
 
     System.out.println("azimuth position error out of bounds");
     return difference;
-  
-    // if (difference >= -180 && difference < 180) {
-    //   return difference;
-    // } else if (difference < -180) {
-    //   return difference + 360;
-    // } else { // called if difference >= 180
-    //   return difference - 360;
-    //}
   }
 
   /**
