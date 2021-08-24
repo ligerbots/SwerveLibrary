@@ -58,13 +58,22 @@ public class WrappedAngle {
   public double getSmallestDifferenceWith(WrappedAngle that) {
     Objects.requireNonNull(that);
     double difference = that.asDouble() - this.asDouble();
-    if (difference >= -180 && difference < 180) {
+    if (0 <= difference && difference < 180) {
       return difference;
-    } else if (difference < -180) {
+    } else if (-180 <= difference && difference < 0) {
       return difference + 360;
-    } else {
-      return difference - 360;
     }
+
+    System.out.println("azimuth position error out of bounds");
+    return difference;
+  
+    // if (difference >= -180 && difference < 180) {
+    //   return difference;
+    // } else if (difference < -180) {
+    //   return difference + 360;
+    // } else { // called if difference >= 180
+    //   return difference - 360;
+    //}
   }
 
   /**
