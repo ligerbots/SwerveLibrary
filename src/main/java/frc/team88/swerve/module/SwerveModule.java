@@ -98,13 +98,14 @@ public class SwerveModule {
     double commandAzimuthVelocity =
         azimuthPositionController.calculateCommandVelocity(
             this.azimuthSensor.getPosition(), this.getAzimuthVelocity());
-
+    commandAzimuthVelocity = 0;
+    System.out.println("OVERRIDDING commandAzimuthVelocity 4");
     // Apply the pid to the wheel velocity.
     this.commandedWheelVelocity =
         this.targetWheelVelocity
             + this.wheelVelocityController.calculateOutput(
                 this.getWheelVelocity(), this.targetWheelVelocity);
-
+    commandedWheelVelocity = 0;
     this.setRawWheelVelocities(this.commandedWheelVelocity, commandAzimuthVelocity);
   }
 

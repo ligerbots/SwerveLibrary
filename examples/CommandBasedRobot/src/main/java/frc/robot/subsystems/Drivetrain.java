@@ -105,6 +105,9 @@ public class Drivetrain extends SubsystemBase {
         isTranslationDirectionSet = translationSpeed >= OIConstants.JOYSTICK_DEADBAND;
         break;
     }
+    // shoud make robot rotate only
+    translationSpeed = 0;
+    System.out.println("override translation speed");
 
     // If left bumper is pressed go into "Turtle Mode" for fine control both scale from % to fps
     if (m_gamepad.getBumper(Hand.kLeft)) {
@@ -117,7 +120,7 @@ public class Drivetrain extends SubsystemBase {
     rotationVelocity *= DriveConstants.MAX_ROTATION;
 
     // Set the velocities, minus translation direction
-    setVelocity(translationSpeed, rotationVelocity);
+    setVelocity(0.0, rotationVelocity);
 
     // If the driver is commanding a translation direction, set it
     if (isTranslationDirectionSet) {

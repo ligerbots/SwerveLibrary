@@ -14,8 +14,8 @@ port = "kMXP" # The name of the port, as passed into the navx constructor.
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
 location-inches = { x = -11.075, y = 12.575 } # The location of the module.
-motors.lo.can-id = 3 # The CAN ID of the first motor.
-motors.hi.can-id = 2 # The CAN ID of the second motor.
+motors.lo.can-id = 2 # The CAN ID of the first motor.
+motors.hi.can-id = 3 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 1 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = -52.38 # The degrees to subtract from the read module angle.
 
@@ -23,8 +23,8 @@ azimuth-sensor.offset = -52.38 # The degrees to subtract from the read module an
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
 location-inches = { x = -11.075, y = -12.575 } # The location of the module.
-motors.lo.can-id = 6 # The CAN ID of the first motor.
-motors.hi.can-id = 5 # The CAN ID of the second motor.
+motors.lo.can-id = 5 # The CAN ID of the first motor.
+motors.hi.can-id = 6 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 4 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = -50.54 # The degrees to subtract from the read module angle.
 
@@ -32,8 +32,8 @@ azimuth-sensor.offset = -50.54 # The degrees to subtract from the read module an
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
 location-inches = { x = 11.075, y = -12.575 } # The location of the module.
-motors.lo.can-id = 9 # The CAN ID of the first motor.
-motors.hi.can-id = 8 # The CAN ID of the second motor.
+motors.lo.can-id = 8 # The CAN ID of the first motor.
+motors.hi.can-id = 9 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 7 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = 3.07 # The degrees to subtract from the read module angle.
 
@@ -41,7 +41,7 @@ azimuth-sensor.offset = 3.07 # The degrees to subtract from the read module angl
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
 location-inches = { x = 11.075, y = 12.575 } # The location of the module.
-motors.lo.can-id = 12 # The CAN ID of the first motor.
-motors.hi.can-id = 11 # The CAN ID of the second motor.
+motors.lo.can-id = 11 # The CAN ID of the first motor.
+motors.hi.can-id = 12 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 10 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = 42.7 # The degrees to subtract from the read module angle.
