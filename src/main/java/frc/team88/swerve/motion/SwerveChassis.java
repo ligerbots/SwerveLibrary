@@ -110,15 +110,24 @@ public class SwerveChassis {
 
     // Command the modules
     ModuleState moduleStates[] = this.inverseKinematics.calculate(constrainedState);
+
+    boolean holdModeActive = this.holdMode
+            && this.constrainedState.getTranslationSpeed() == 0
+            && this.constrainedState.getRotationVelocity() == 0;
+    double maxAzimuthError = 0;
+    for(int i=0;i<moduleStates.length;i++){
+      double error = holdModeActive? 0 : Math.abs(this.config.getModules()[i].getAzimuthPosition().getSmallestDifferenceWith(new WrappedAngle(moduleStates[i].getAzimuthPosition())));
+      maxAzimuthError = Math.max(error, maxAzimuthError);
+    }
+    double dampening = 1 / (1 + Math.exp(maxAzimuthError-10)); // dampen at 10 degrees of error
+
     for (int idx = 0; idx < moduleStates.length; idx++) {
       SwerveModule module = this.config.getModules()[idx];
-      if (this.holdMode
-          && this.constrainedState.getTranslationSpeed() == 0
-          && this.constrainedState.getRotationVelocity() == 0) {
+      if (holdModeActive) {
         module.set(0, module.getAzimuthPosition());
       } else {
         module.set(
-            moduleStates[idx].getWheelSpeed(),
+                dampening * moduleStates[idx].getWheelSpeed(),
             new WrappedAngle(moduleStates[idx].getAzimuthPosition()));
       }
     }
