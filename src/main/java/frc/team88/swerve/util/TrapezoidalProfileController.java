@@ -162,7 +162,7 @@ public class TrapezoidalProfileController {
 
     // Limit the command velocity such that it has time to deccelerate to hit the
     // target at the right velocity
-    commandVelocity = applyDeccelerationLimit(commandVelocity, forwards);
+    commandVelocity = applyDeccelerationLimit(commandVelocity, currentPosition, forwards);
     this.lastCommandedVelocity = commandVelocity;
 
     // Determine the position to command
@@ -214,11 +214,11 @@ public class TrapezoidalProfileController {
    * @param forwards Whether we are moving forwards or backwards.
    * @return The limited velocity, in units per second.
    */
-  protected double applyDeccelerationLimit(double commandVelocity, boolean forwards) {
+  protected double applyDeccelerationLimit(double commandVelocity, double currentPosition, boolean forwards) {
     // v^2 = v0^2 + 2ax -> v0 = sqrt(v^2 - 2ax)
     double limitVelocity =
         MathUtils.signedPow(targetVelocity, 2)
-            + 2 * getMaxAcceleration() * (this.targetPosition - lastCommandedPosition);
+            + 2 * getMaxAcceleration() * (this.targetPosition - currentPosition);
     limitVelocity = Math.signum(limitVelocity) * Math.sqrt(Math.abs(limitVelocity));
     if (forwards) {
       return Math.min(limitVelocity, commandVelocity);
