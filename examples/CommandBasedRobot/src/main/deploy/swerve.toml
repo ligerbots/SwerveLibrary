@@ -18,7 +18,9 @@ motors.lo.can-id = 3 # The CAN ID of the first motor.
 motors.hi.can-id = 2 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 1 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = -52.38 # The degrees to subtract from the read module angle.
-
+azimuth-controller.kD = 0.0
+wheel-controller.kD = 0.0
+    
 # Back Right
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
@@ -27,7 +29,9 @@ motors.lo.can-id = 6 # The CAN ID of the first motor.
 motors.hi.can-id = 5 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 4 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = -50.54 # The degrees to subtract from the read module angle.
-
+azimuth-controller.kD = 0.0
+wheel-controller.kD = 0.0
+    
 # Front Right
 [[modules]]
 template = "team88.diff-swerve-2021.beta" # The template for the module.
@@ -36,6 +40,8 @@ motors.lo.can-id = 9 # The CAN ID of the first motor.
 motors.hi.can-id = 8 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 7 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = 3.07 # The degrees to subtract from the read module angle.
+azimuth-controller.kD = 0.0
+wheel-controller.kD = 0.0
 
 # Front Left
 [[modules]]
@@ -45,3 +51,5 @@ motors.lo.can-id = 12 # The CAN ID of the first motor.
 motors.hi.can-id = 11 # The CAN ID of the second motor.
 azimuth-sensor.can-id = 10 # The CAN ID of the CANCoder.
 azimuth-sensor.offset = 42.7 # The degrees to subtract from the read module angle.
+azimuth-controller.kD = 0.0
+wheel-controller.kD = 0.0
