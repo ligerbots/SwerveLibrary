@@ -34,6 +34,15 @@ public class SensorTransmissionConfiguration implements NetworkTablePopulator {
     this.offset = Configuration.configCheckAndGetDouble(config, "offset");
   }
 
+  public SensorTransmissionConfiguration(boolean inverted, double ratio, double offset) {
+    this.inverted = inverted;
+    this.ratio = ratio;
+    if (this.ratio <= 0) {
+      throw new InvalidConfigValueException("Ratio must be positive.");
+    }
+    this.offset = offset;
+  }
+
   /**
    * Gets if the sensor is inverted.
    *
