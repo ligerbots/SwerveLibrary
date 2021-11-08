@@ -32,6 +32,13 @@ public class Falcon500Configuration implements NetworkTablePopulator {
     }
   }
 
+  public Falcon500Configuration(boolean inverted, double maxSpeed) {
+    this.inverted = inverted;
+    this.maxSpeed = maxSpeed;
+    if (this.maxSpeed <= 0) {
+      throw new InvalidConfigValueException("Max speed must be positive.");
+    }
+  }
   /**
    * Gets if the motor is inverted.
    *
